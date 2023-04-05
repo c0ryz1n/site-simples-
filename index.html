@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <style>
+        header {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1bcedb;
+        }
+
+        header h1 {
+            text-align: center;
+            font-size: 48px;
+        }
+
+        header p {
+            text-align: center;
+            color: #b31f1f;
+
+           
+        }
+        
+    
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aventura dos Games</h1>
+        <p>A melhor loja de games de Curitiba.</p>
+        <a class="btn btn-primary" href="criacaoConta.html">Criar Conta</a>
+        <a href="paginaDeLogin.html">Login</a>
+    </header>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Aventura Dos Games</h1>
+    <p>Nosso site de venda de jogos traz a melhor seleção de jogos para todos os gostos!</p>
+    <p>Jogos para console, PC, smartphone e muito mais! Compre agora e receba em casa!</p>
+
+    <p>Essa é nossa coleção de jogos para PC:</p>
+    <div class="collection">
+        <h2>Jogos para PC</h2>
+        <p>Jogue nos melhores jogos de PC agora!</p>
+        <ul>
+            <li><a href="#">The Witcher 3: Wild Hunt</a></li>
+            <li><a href="#">The Elder Scrolls V: Skyrim Special Edition</a></li>
+            <li><a href="#">Red Dead Redemption 2</a></li>
+            <li><a href="#">Cyberpunk 2077</a></li>
+            <li><a href="#">GTA 5</a></li>
+        </ul>
+    </div>
+
+    <p>E os nossos jogos para console:</p>
+    <div class="collection">
+        <h2>Jogos para Console</h2>
+        <p>Jogue em qualquer console com os melhores jogos!</p>
+        <ul>
+            <li><a href="#">Zelda: Breath of the Wild</a></li>
+            <li><a href="#">Pokémon Sword/Shield</a></li>
+            <li><a href="#">Animal Crossing: New Horizons</a></li>
+            <li><a href="#">Mario Kart 8 Deluxe</a></li>
+            <li><a href="#">Super Mario 3D All Stars</a></li>
+        </ul>
+    </div
+
+    go
+    package main
+    
+    import (
+        "fmt"
+        "github.com/gin-gonic/gin"
+        "time"
+    
+        "github.com/gin-contrib/multipart"
+        "github.com/gin-contrib/gin-multipart"
+    )
+    
+    type User struct {
+        Username string
+        Password string
+    }
+    
+    var ginCfg gin.Config
+    
+    func init() {
+        fmt.Println("Starting server")
+    
+        ginCfg = gin.Default()
+        ginCfg.SetMode(gin.ReleaseMode)
+    
+        ginCfg.Use(multipart.NewReader())
+    
+        for {
+            c := ginCfg.Engine()
+            c.Run()
+            time.Sleep(time.Second 10)
+        }
+    }
+    
+    func login(c *gin.Context) {
+        if len(c.Request.Form["username"]) < 2 || len(c.Request.Form["password"]) < 2 {
+            return c.AbortWithStatus(400, "Incorrect username or password")
+        }
+    
+        var user User
+        if err := c.Request.MultipartForm("file"); err != nil {
+            c.AbortWithStatus(400, "Incompatible file format")
+        }
+        if err := c.Get("username"); err != nil {
+            c.AbortWithStatus(400, "Invalid username"),
+        }
+        if err := c.Get("password"); err != nil {
+            c.AbortWithStatus(400, "Invalid password")
+        }
+    
+        user = User{
+            Username: c.Get("username"),
+            Password: c.Get("password"),
+        }
+    
+        if err := c.ShouldBindJson(&user); err != nil {
+            c.AbortWithStatus(500, "Unable to bind JSON")
+        }
+    
+        if err := c
+        <button class="btn btn-primary" type="submit"><span class="fa fa-sign-in"></span> Login</button>   

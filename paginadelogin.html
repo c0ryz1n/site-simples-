@@ -1,0 +1,62 @@
+<a href="paginaDeLogin.html">Login</a>
+
+```go
+package main
+
+import (
+    "fmt"
+    "github.com/gin-gonic/gin"
+    "time"
+
+    "github.com/gin-contrib/multipart"
+    "github.com/gin-contrib/gin-multipart"
+)
+
+type User struct {
+    Username string
+    Password string
+}
+
+var ginCfg gin.Config
+
+func init() {
+    fmt.Println("Starting server")
+
+    ginCfg = gin.Default()
+    ginCfg.SetMode(gin.ReleaseMode)
+
+    ginCfg.Use(multipart.NewReader())
+
+    for {
+        c := ginCfg.Engine()
+        c.Run()
+        time.Sleep(time.Second 10)
+    }
+}
+
+func login(c *gin.Context) {
+    if len(c.Request.Form["username"]) < 2 || len(c.Request.Form["password"]) < 2 {
+        return c.AbortWithStatus(400, "Incorrect username or password")
+    }
+
+    var user User
+    if err := c.Request.MultipartForm("file"); err != nil {
+        c.AbortWithStatus(400, "Incompatible file format")
+    }
+    if err := c.Get("username"); err != nil {
+        c.AbortWithStatus(400, "Invalid username"),
+    }
+    if err := c.Get("password"); err != nil {
+        c.AbortWithStatus(400, "Invalid password")
+    }
+
+    user = User{
+        Username: c.Get("username"),
+        Password: c.Get("password"),
+    }
+
+    if err := c.ShouldBindJson(&user); err != nil {
+        c.AbortWithStatus(500, "Unable to bind JSON")
+    }
+
+    if err := c
